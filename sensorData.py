@@ -2,13 +2,6 @@ from gpiozero import MCP3208
 
 import Settings
 
-#ch = [MCP3208(channel=0),
-#      MCP3208(channel=1),
-#      MCP3208(channel=2),
-#      MCP3208(channel=3)]
-
-ch = [0,1,2,3]
-
 #initialization
 Sensors = []
 

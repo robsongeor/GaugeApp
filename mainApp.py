@@ -38,7 +38,7 @@ class NavBar(QtWidgets.QWidget):
         self.setFixedHeight(60)
         
         self.setAttribute(QtCore.Qt.WA_StyledBackground, True)
-        self.setStyleSheet('background-color: #F2F2F2')
+        self.setStyleSheet('background-color: rgba(' + ','.join(tuple(str(item) for item in colors.g2.getRgb()))  + ')')
         
         self.setLayout(layout)
         self.show()
@@ -53,7 +53,9 @@ class StatWindow(QWidget):
         layout = QtWidgets.QHBoxLayout()
         self.setFixedHeight(self.height)
         self.setAttribute(QtCore.Qt.WA_StyledBackground, True)
-        self.setStyleSheet('background-color: #eaeaea')
+    
+        #converts color from int tuple to string tuple then converst from a tuple to string (1, 2, 3) -> ('1', '2', '3') -> '1, 2, 3'  
+        self.setStyleSheet('background-color: rgba(' + ','.join(tuple(str(item) for item in colors.g3.getRgb()))  + ')')
         self.setLayout(layout)
         self.show()
     
