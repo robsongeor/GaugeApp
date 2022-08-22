@@ -28,7 +28,6 @@ class UI(QtWidgets.QWidget):
         for w in Content.GetPageWidgets(self.navBar.page):
             layout.addWidget(w())
         
-        
         # set the layout
         self.setLayout(layout)
         
@@ -44,8 +43,6 @@ if Settings.PiMode:
     UIWindow.setCursor(Qt.BlankCursor)
 else:
     UIWindow.show()
-
-
 
 app.exec_()
 
