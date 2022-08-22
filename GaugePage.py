@@ -21,11 +21,10 @@ S1 = [sd.SensorData("test", 0),
 
 class StatWindow(QWidget):
     #setup stuff not sure what this means
-    def __init__ (self,*args, **kwargs):
+    def __init__ (self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
         self.height = 298
-        self.fill = colors.g1
         layout = QtWidgets.QHBoxLayout()
         self.setFixedHeight(self.height)
         self.setAttribute(QtCore.Qt.WA_StyledBackground, True)

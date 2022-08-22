@@ -5,30 +5,12 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import * 
 from PyQt5.QtWidgets import * 
 
-import ColorPallete as colors
 import Settings 
 
+import Navigation as nav
 import GaugePage as gp
 
-#create a data array to hold sensor values
-
-
-    
-class NavBar(QtWidgets.QWidget):
-    #setup stuff not sure what this means
-    def __init__ (self,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        layout = QtWidgets.QHBoxLayout()
-        
-        self.setFixedHeight(60)
-        
-        self.setAttribute(QtCore.Qt.WA_StyledBackground, True)
-        self.setStyleSheet('background-color: rgba(' + ','.join(tuple(str(item) for item in colors.g2.getRgb()))  + ')')
-        
-        self.setLayout(layout)
-        self.show()
-             
+#create a data array to hold sensor values   
 class UI(QtWidgets.QWidget): 
     def __init__(self, *args, **kwargs):
         super(UI, self).__init__(*args, **kwargs)
@@ -38,11 +20,14 @@ class UI(QtWidgets.QWidget):
         layout.setSpacing(0)
         layout.setContentsMargins(0, 0, 0, 0)
 
-        #load the sensor button widget
-        self.navBar = NavBar()
+        #Load nav Bar
+        self.navBar = nav.NavBar()
+        layout.addWidget(self.navBar)
+        
+        #Load Window
         self.statWindow = gp.StatWindow()
         self.buttonWindow = gp.ButtonWindow()
-        layout.addWidget(self.navBar)
+        
         layout.addWidget(self.statWindow)
         layout.addWidget(self.buttonWindow)
         
