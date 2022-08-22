@@ -1,46 +1,24 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import Qt
 
 from PyQt5.QtCore import * 
 from PyQt5.QtGui import * 
 from PyQt5.QtWidgets import * 
 
-from PyQt5 import uic
-
-import sys
-import random
-
 import sensorButton as sb
 import ColorPallete as colors
 import sensorData as sd
 import Settings 
 
-#create a data array to hold sensor values
 
 buttonObjects = []
 buttonNames = ["Battery", "Coolant", "Trans", "Exhaust"]
-updatePeriod = 33
 
 S1 = [sd.SensorData("test", 0), 
       sd.SensorData("test", 1),
       sd.SensorData("test", 2),
       sd.SensorData("test", 3)]
-    
-class NavBar(QtWidgets.QWidget):
-    #setup stuff not sure what this means
-    def __init__ (self,*args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        layout = QtWidgets.QHBoxLayout()
-        
-        self.setFixedHeight(60)
-        
-        self.setAttribute(QtCore.Qt.WA_StyledBackground, True)
-        self.setStyleSheet('background-color: rgba(' + ','.join(tuple(str(item) for item in colors.g2.getRgb()))  + ')')
-        
-        self.setLayout(layout)
-        self.show()
-        
+
 class StatWindow(QWidget):
     #setup stuff not sure what this means
     def __init__ (self,*args, **kwargs):
@@ -59,7 +37,7 @@ class StatWindow(QWidget):
     
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.getNextDataPoint)
-        self.timer.start(updatePeriod)
+        self.timer.start(Settings.refresh_Rate)
         
     #update method  
     def getNextDataPoint(self):
@@ -111,9 +89,7 @@ class StatWindow(QWidget):
                     
                     painter.drawEllipse(x, y-20, wh, wh)
                     i += 1
-        
-        
-        
+            
 class ButtonWindow(QWidget):
     #setup stuff not sure what this means
     def __init__ (self,*args, **kwargs):
@@ -131,57 +107,16 @@ class ButtonWindow(QWidget):
         self.setPalette(p)
         
         #create and add button to array
-        for i in range(len(buttonNames)):
+        for i in range(Settings.sensor_Count):
             buttonObjects.append(sb.SensorButton(buttonNames[i], colors.btnColor[i]))
             layout.addWidget(buttonObjects[i])
             
         #Updates the data every x milliseconds
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.updateData)
-        self.timer.start(updatePeriod)
+        self.timer.start(Settings.refresh_Rate)
         
     def updateData(self):
         for i in range(len(buttonObjects)):
             buttonObjects[i].update_Data(round(S1[i].lastVal))
-            
-        
-        
-class UI(QtWidgets.QWidget): 
-    def __init__(self, *args, **kwargs):
-        super(UI, self).__init__(*args, **kwargs)
-        
-        #set the layout
-        layout = QtWidgets.QVBoxLayout()
-        layout.setSpacing(0)
-        layout.setContentsMargins(0, 0, 0, 0)
-
-        
-        #load the sensor button widget
-        self.buttonWindow = ButtonWindow()
-        self.navBar = NavBar()
-        self.statWindow = StatWindow()
-        layout.addWidget(self.navBar)
-        layout.addWidget(self.statWindow)
-        layout.addWidget(self.buttonWindow)
-        
-        # set the layout
-        self.setLayout(layout)
-        
-        #set size of screen
-        self.resize(800, 480)
-        
-#initalizwe the app
-app = QtWidgets.QApplication([])
-UIWindow = UI()
-
-if Settings.PiMode:
-    UIWindow.showFullScreen()
-    UIWindow.setCursor(Qt.BlankCursor)
-else:
-    UIWindow.show()
-
-
-
-app.exec_()
-
-
+             
