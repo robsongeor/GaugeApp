@@ -6,9 +6,9 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import * 
 
 import Settings 
+import Content
 
 import Navigation as nav
-import GaugePage as gp
 
 #create a data array to hold sensor values   
 class UI(QtWidgets.QWidget): 
@@ -20,22 +20,20 @@ class UI(QtWidgets.QWidget):
         layout.setSpacing(0)
         layout.setContentsMargins(0, 0, 0, 0)
 
-        #Load nav Bar
-        self.navBar = nav.NavBar()
+        #Load nav Bar with gauge page
+        self.navBar = nav.NavBar("Gauge")
         layout.addWidget(self.navBar)
         
-        #Load Window
-        self.statWindow = gp.StatWindow()
-        self.buttonWindow = gp.ButtonWindow()
+        #Load Content // Get the widgets in a given page
+        for w in Content.GetPageWidgets(self.navBar.page):
+            layout.addWidget(w())
         
-        layout.addWidget(self.statWindow)
-        layout.addWidget(self.buttonWindow)
         
         # set the layout
         self.setLayout(layout)
         
         #set size of screen
-        self.resize(800, 480)
+        self.resize(*Settings.window_Size)
         
 #initalizwe the app
 app = QtWidgets.QApplication([])

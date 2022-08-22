@@ -1,6 +1,9 @@
 ##Will only work on PI with MCP3208 if true
 PiMode = False
 
+#Window Size
+window_Size = (800, 480)
+
 #Refresh Rate (ms)
 refresh_Rate = 33
 
