@@ -24,6 +24,7 @@ class UI(QtWidgets.QWidget):
         self.navBar = nav.NavBar("Gauge")
         layout.addWidget(self.navBar)
         
+        
         #Load Content // Get the widgets in a given page
         for w in Content.GetPageWidgets(self.navBar.page):
             layout.addWidget(w())

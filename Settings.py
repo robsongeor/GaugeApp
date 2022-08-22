@@ -27,5 +27,9 @@ sensor_4_range = [0, 100]
 sensor_4_color = (255, 73, 73)
 
 #ThemeSettings
-NightMode = True
-BlueLightCorrection = 10
+NightMode = False
+BlueLightCorrection = 0
+
+#Font 
+font_reg = 'Inter'
+font_sz_nav = 10

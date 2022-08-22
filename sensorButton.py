@@ -24,10 +24,10 @@ class SensorButton(QtWidgets.QWidget):
         self.findChild(QLabel, "sensorName").setText(sn)
         self.sensorValue = self.findChild(QLabel, "sensorData")
         
-        #set text values
+        
         
             
-        self.show()
+        #self.show()
 
         # On click event
         self.mouseReleaseEvent=self.clicked

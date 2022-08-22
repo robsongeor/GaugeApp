@@ -32,11 +32,13 @@ class StatWindow(QWidget):
         #converts color from int tuple to string tuple then converst from a tuple to string (1, 2, 3) -> ('1', '2', '3') -> '1, 2, 3'  
         self.setStyleSheet('background-color: rgba(' + ','.join(tuple(str(item) for item in colors.g3.getRgb()))  + ')')
         self.setLayout(layout)
-        self.show()
+        #self.show()
     
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.getNextDataPoint)
         self.timer.start(Settings.refresh_Rate)
+        
+        
         
     #update method  
     def getNextDataPoint(self):
@@ -99,7 +101,7 @@ class ButtonWindow(QWidget):
         layout.setSpacing(0)
         layout.setContentsMargins(0, 0, 0, 0)
         self.setLayout(layout)
-        self.show()
+        #Gself.show()
         self.setAutoFillBackground(True)
         p = self.palette()
         p.setColor(self.backgroundRole(), colors.g2)
